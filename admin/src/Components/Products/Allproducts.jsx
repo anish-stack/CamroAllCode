@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Allproducts = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,7 @@ const Allproducts = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full overflow-scroll p-2">
       <h1 className="text-2xl text-black font-bold mb-4">Product List</h1>
       <table className="w-[1400px] border-collapse border border-gray-300">
         <thead>
@@ -55,12 +56,12 @@ const Allproducts = () => {
                   <img src={product.images[0].img} alt={product.productName} className="w-24 h-24 object-cover" />
                 )}
               </td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.productName}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.originalPrice}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.discoPrice}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.vendor}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.avilable ? 'Available' : 'Not Available'}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{product.Desc}</td>
+              <td className="border text-blue-400 underline  border-gray-300 px-4 py-2"><Link to={`/EditProducts/${product._id}`}>{product.productName}</Link></td>
+              <td className="border text-black  border-gray-300 px-4 py-2">{product.originalPrice}</td>
+              <td className="border text-black  border-gray-300 px-4 py-2">{product.discoPrice}</td>
+              <td className="border text-black  border-gray-300 px-4 py-2">{product.vendor}</td>
+              <td className="border text-black  border-gray-300 px-4 py-2">{product.avilable ? 'Available' : 'Not Available'}</td>
+              <td className="border text-black w-64 h-16 overflow-hidden border-gray-300 px-4 py-2">{product.Desc}</td>
               <td className="border text-black border-gray-300 px-4 py-2">{product.Category}</td>
               {/* Render only the first image */}
             </tr>

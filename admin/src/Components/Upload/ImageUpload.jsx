@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 
 const ImageUpload = () => {
@@ -6,9 +6,11 @@ const ImageUpload = () => {
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
 
+  const fileInputRef = useRef(null); // Create a ref for the file input
+
   const handleFileChange = (event) => {
     const files = event.target.files;
-    setSelectedFiles([...selectedFiles, ...files]);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
   const handleUpload = async () => {
@@ -20,14 +22,14 @@ const ImageUpload = () => {
     try {
       setUploading(true);
       const formData = new FormData();
-      selectedFiles.forEach(file => {
+      selectedFiles.forEach((file) => {
         formData.append('images', file);
       });
 
       const response = await axios.post('https://cooker.onrender.com/api/v1/image', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+        },
       });
 
       setMessage(response.data.message);
@@ -42,7 +44,7 @@ const ImageUpload = () => {
   const handleDrop = (event) => {
     event.preventDefault();
     const files = Array.from(event.dataTransfer.files);
-    setSelectedFiles([...selectedFiles, ...files]);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
   const handleDragOver = (event) => {
@@ -53,15 +55,20 @@ const ImageUpload = () => {
     setSelectedFiles([]);
   };
 
+  const triggerFileSelectPopup = () => fileInputRef.current.click();
+
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-md">
+    <div className=" flex items-center justify-center flex-col min-h-dvh min-w-xl mx-auto p-6 bg-gray-100 rounded-md">
       <h2 className="text-xl font-semibold mb-4">Image Upload</h2>
-      <div
-        className="border-dashed border-2 border-gray-300 p-4 mb-4"
+    <div>
+    <div
+        className="border-dashed border-2 border-gray-300 p-4 mb-4 cursor-pointer"
+        onClick={triggerFileSelectPopup} // Add click functionality
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         <input
+          ref={fileInputRef}
           type="file"
           name="images"
           accept="image/*"
@@ -97,6 +104,7 @@ const ImageUpload = () => {
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
       {message && <p className="mt-4 text-green-600">{message}</p>}
+    </div>
     </div>
   );
 };

@@ -22,7 +22,7 @@ useEffect(()=>{
 
   const makeActive = async (id) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/v1/Banner/active/${id}`);
+      const res = await axios.put(`https://cooker.onrender.com/api/v1/Banner/active/${id}`);
       alert('Banner Activated Successfully');
       console.log(res.data);
       // Refresh banners after activation
@@ -34,7 +34,7 @@ useEffect(()=>{
 
   const makeInactive = async (id) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/v1/Banner/inactive/${id}`);
+      const res = await axios.put(`https://cooker.onrender.com/api/v1/Banner/inactive/${id}`);
       alert('Banner Deactivated Successfully');
       console.log(res.data);
       // Refresh banners after deactivation
@@ -46,7 +46,7 @@ useEffect(()=>{
 
   const deleteBanner = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/v1/Bannerdelete/${id}`);
+      const res = await axios.delete(`https://cooker.onrender.com/api/v1/Bannerdelete/${id}`);
       alert('Banner Deleted Successfully');
       console.log(res.data);
       // Refresh banners after deletion

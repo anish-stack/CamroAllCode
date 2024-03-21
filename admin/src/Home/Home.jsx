@@ -10,24 +10,42 @@ import Orders from "../Components/orders/Orders"
 import AllCategories from "../Components/Products/AllCategories"
 import Shipped from "../Components/orders/Shipped"
 import ContactRequest from "../Components/Contact/ContactRequest"
+import EditProduct from "../Components/Products/EditProduct"
+import ImageUpload from "../Components/Upload/ImageUpload"
+import Allimages from "../Components/Products/Allimages"
+import OrderDetails from "../Components/orders/OrderDetails"
+import User from "../Components/Users/User"
+import Contacts from "../Components/Users/Contacts"
+import Logins from "../Components/Users/Login"
+import EditPoject from "../Components/Products/EditP"
 const Home = () => {
   return (
     <div className="w-full flex">
-        <div className="w-[15%]  ">
+        <div className="  z-10 w-[18%]  ">
             <Header/>
         </div>
-        <div className="w-[85%] absolute left-[17%] z-99 bg-white ">
+        <div className="w-[85%] overflow-hidden relative  z-99 bg-white ">
            <Routes>
             <Route path="/home" element={<FrontPage/>} />
             <Route path="/All Products" element={<Allproducts/>} />
+            <Route path="/EditProducts/:id" element={<EditPoject/>} />
 
             
             <Route path="/Create-Products" element={<CreateProduct/>} />
             <Route path="/Create Banner" element={<CreateBanner/>} />
             <Route path="/Show Banner" element={<AllBanner/>} />
             <Route path="/Orders" element={<Orders/>} />
+            <Route path="/Orders/:id" element={<OrderDetails/>} />
+
+            <Route path="/upload" element={<ImageUpload/>} />
+            <Route path="/Check-All-Images" element={<Allimages/>} />
+            <Route path="/Contacts" element={<Contacts/>} />
+            <Route path="/Login" element={<Logins/>} />
+
+
+
             <Route path="/Categories" element={<AllCategories/>} />
-            <Route path="/Shipped" element={<Shipped/>} />
+            <Route path="/All-user" element={<User/>} />
             <Route path="/Contact-Request" element={<ContactRequest/>} />
 
 
